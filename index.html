@@ -6,24 +6,40 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
   </head>
   <body ng-controller="indexCtrl">
-    <div class="navbar navbar-default navbar-fixed">
-      <div class="navbar-container">
-        <ul class="hidden-xs">
-          <li>Home</li>
-          <li>Test</li>
-        </ul>
+    <header>
+      <div class="navbar navbar-default navbar-fixed">
+        <div class="navbar-container">
+          <ul class="hidden-sm">
+            <li>
+              <i class="glyphicon glyphicon-home"></i>
+              Home
+            </li>
+            <li>
+              <i class="glyphicon glyphicon-info-sign"></i>
+              About
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="container test">
-      <label>Name:</label>
-      <input type="text" ng-model="yourName" placeholder="Enter a name here">
+    </header>
+    <div class="container">
+      <h1 class="title">Bootstrap</h1>
+      <label>Message:</label>
+      <input type="text" ng-model="message" placeholder="Test Message Binding" />
       <hr>
       <h1>Hello {{message}}!</h1>
       <h2>Hello {{message}}!</h2>
       <h3>Hello {{message}}!</h3>
       <h4>Hello {{message}}!</h4>
       <h5>Hello {{message}}!</h5>
+      <p>Paragraph {{message}}!</p>
     </div>
+
+    <footer class="footer">
+      <div class="container">Just some footnotes</div>
+    </footer>
+
+  <!-- Footer Scripts -->
   <script type="text/javascript" src="assets/vendor/angular/angular.min.js"></script>
   <script type="text/javascript" src="app/app.js"></script>
   </body>

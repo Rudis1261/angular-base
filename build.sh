@@ -3,10 +3,12 @@ alias sassc="docker run -it --rm --name=sassc -v $(pwd):$(pwd) -w $(pwd) xzyfer/
 
 docker rm -f sassc
 
-while true;
+while inotifywait -r -e modify assets/scss;
 do
-    sleep 1
-    echo `date`" - Building Assets"
-    #sassc assets/scss/main.scss -t compressed assets/css/main.css | ccze -A
-    sassc assets/scss/main.scss assets/css/main.css | ccze -A
-done;
+    echo `date`" RUNNING: "
+    sassc assets/scss/main.scss assets/css/main.css 2>&1 > /tmp/error
+    rc=$?; if [ $rc != 0 ]; then
+        notify-send "SASS BUILD FAILED!"
+        cat /tmp/error | ccze -A
+    fi
+done

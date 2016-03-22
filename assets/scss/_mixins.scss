@@ -74,14 +74,26 @@ $break-max: (
   }
 }
 
-.visible-xs {
-  @include respond-from('xs') {
-    display: block;
+.hidden-sm {
+  @include respond-to('sm') {
+    display: none;
   }
 }
 
-.test {
-  @include respond-from('md') {
-    background: $bad;
+.hidden-md {
+  @include respond-to('md') {
+    display: none;
+  }
+}
+
+.hidden-lg {
+  @include respond-to('lg') {
+    display: none;
+  }
+}
+
+.visible-xs {
+  @include respond-from('xs') {
+    display: block;
   }
 }

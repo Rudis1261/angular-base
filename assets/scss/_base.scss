@@ -6,10 +6,17 @@ html, body {
     margin: 0px;
     padding: 0px;
     font-family: Helvetica, Arial;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.5px;
 }
 
 body {
     background: $white;
     padding-top: 50px;
+}
+
+h1, h2, h3, h4, h5 {
+    &.title {
+        border-bottom: 1px solid $grey-light;
+        width: 100%;
+    }
 }

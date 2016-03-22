@@ -4,8 +4,12 @@ $black: #000;
 $bad: #bada55;
 
 $grey: #ccc;
+$grey-dark: #222;
 $grey-light: #ddd;
+$grey-lightest: #efefef;
 $grey-medium: #999;
+
+$blue: #0683D6;
 
 $navbar: #222;
 $navbar-hover: #333;
@@ -20,3 +24,7 @@ $screen-lg: 1200px;
 $mobile: $screen-xs;
 $tablet: $screen-sm;
 $desktop: $screen-md;
+
+// Fonts
+$font-path: '../fonts/';
+$font-name: 'glyphicons-halflings-regular';
