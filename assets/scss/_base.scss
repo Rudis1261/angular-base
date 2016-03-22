@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+    font-family: Helvetica, Arial;
+    letter-spacing: 0.7px;
+}
+
+body {
+    background: $white;
+    padding-top: 50px;
+}

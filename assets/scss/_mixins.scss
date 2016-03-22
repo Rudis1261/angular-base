@@ -1,0 +1,87 @@
+/// @type Map
+$break-min: (
+  'xs': (min-width: $screen-xs),
+  'sm': (min-width: $screen-sm),
+  'md': (min-width: $screen-md),
+  'lg': (min-width: $screen-lg),
+);
+
+/// @type Map
+$break-max: (
+  'xs': (max-width: $screen-xs),
+  'sm': (max-width: $screen-sm),
+  'md': (max-width: $screen-md),
+  'lg': (max-width: $screen-lg),
+);
+
+/// Responsive breakpoint manager
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-from($breakpoint) {
+  $media: map-get($break-min, $breakpoint);
+
+  @if not $media {
+    @error "No query could be retrieved from `#{$breakpoint}`. "
+    + "Please make sure it is defined in `$break-min` map.";
+  }
+
+  @media #{inspect($media)} {
+    @content;
+  }
+}
+
+/// Responsive breakpoint manager
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+  $media: map-get($break-max, $breakpoint);
+
+  @if not $media {
+    @error "No query could be retrieved from `#{$breakpoint}`. "
+    + "Please make sure it is defined in `$break-max` map.";
+  }
+
+  @media #{inspect($media)} {
+    @content;
+  }
+}
+
+/// Responsive breakpoint manager
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-between($from, $to) {
+  $mediaFrom: map-get($break-min, $from);
+  $mediaTo: map-get($break-max, $to);
+
+  @if not $mediaFrom {
+    @error "No query could be retrieved from `#{$breakpoint}`. "
+    + "Please make sure it is defined in `$break-min` map.";
+  }
+
+  @if not $mediaTo {
+    @error "No query could be retrieved from `#{$breakpoint}`. "
+    + "Please make sure it is defined in `$break-max` map.";
+  }
+
+  @media #{inspect($mediaFrom)} and #{inspect($mediaTo)} {
+    @content;
+  }
+}
+
+.hidden-xs {
+  @include respond-to('xs') {
+    display: none;
+  }
+}
+
+.visible-xs {
+  @include respond-from('xs') {
+    display: block;
+  }
+}
+
+.test {
+  @include respond-from('md') {
+    background: $bad;
+  }
+}

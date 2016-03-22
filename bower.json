@@ -1,0 +1,32 @@
+{
+  "name": "TV Tracker",
+  "homepage": "https://tvtracker.co.za",
+  "authors": [
+    "Rudi Strydom <iam@thatguy.co.za>"
+  ],
+  "description": "Just another Angular JS application",
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "TV",
+    "Tracker"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.5.2",
+    "angular-resource": "^1.5.2",
+    "angular-animate": "^1.5.2",
+    "angular-touch": "^1.5.2"
+  }
+}
