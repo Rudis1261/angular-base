@@ -3,3 +3,60 @@
     max-width: $desktop;
     padding: 15px;
 }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.hidden, .ng-hide {
+    display: none;
+}
+
+.hidden-xs {
+  @include respond-to('xs') {
+    display: none;
+  }
+}
+
+.hidden-sm {
+  @include respond-to('sm') {
+    display: none;
+  }
+}
+
+.hidden-md {
+  @include respond-to('md') {
+    display: none;
+  }
+}
+
+.hidden-lg {
+  @include respond-to('lg') {
+    display: none;
+  }
+}
+
+.visible-xs {
+  @include respond-to('xs') {
+    display: block;
+  }
+}
+
+.visible-sm {
+  @include respond-to('sm') {
+    display: block;
+  }
+}
+
+.visible-md {
+  @include respond-to('md') {
+    display: block;
+  }
+}
+
+.visible-lg {
+  @include respond-to('lg') {
+    display: block;
+  }
+}
+

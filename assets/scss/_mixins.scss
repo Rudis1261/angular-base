@@ -14,9 +14,6 @@ $break-max: (
   'lg': (max-width: $screen-lg),
 );
 
-/// Responsive breakpoint manager
-/// @param {String} $breakpoint - Breakpoint
-/// @requires $breakpoints
 @mixin respond-from($breakpoint) {
   $media: map-get($break-min, $breakpoint);
 
@@ -30,9 +27,6 @@ $break-max: (
   }
 }
 
-/// Responsive breakpoint manager
-/// @param {String} $breakpoint - Breakpoint
-/// @requires $breakpoints
 @mixin respond-to($breakpoint) {
   $media: map-get($break-max, $breakpoint);
 
@@ -46,9 +40,6 @@ $break-max: (
   }
 }
 
-/// Responsive breakpoint manager
-/// @param {String} $breakpoint - Breakpoint
-/// @requires $breakpoints
 @mixin respond-between($from, $to) {
   $mediaFrom: map-get($break-min, $from);
   $mediaTo: map-get($break-max, $to);
@@ -68,32 +59,8 @@ $break-max: (
   }
 }
 
-.hidden-xs {
-  @include respond-to('xs') {
-    display: none;
-  }
-}
-
-.hidden-sm {
-  @include respond-to('sm') {
-    display: none;
-  }
-}
-
-.hidden-md {
-  @include respond-to('md') {
-    display: none;
-  }
-}
-
-.hidden-lg {
-  @include respond-to('lg') {
-    display: none;
-  }
-}
-
-.visible-xs {
-  @include respond-from('xs') {
-    display: block;
-  }
+@mixin border-radius($size) {
+  -webkit-border-radius: $size;
+  -moz-border-radius: $size;
+  border-radius: $size;
 }
