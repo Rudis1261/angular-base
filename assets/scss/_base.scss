@@ -1,24 +1,24 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html, body {
-    margin: 0px;
-    padding: 0px;
-    font-family: Helvetica, Arial;
-    letter-spacing: 0.5px;
+  margin: 0px;
+  padding: 0px;
+  font-family: Helvetica, Arial;
+  letter-spacing: 0.5px;
 }
 
 body {
-    background: $white;
-    padding-top: 50px;
+  background: $white;
+  padding-top: 50px;
 }
 
 h1, h2, h3, h4, h5 {
-    &.title {
-        border-bottom: 1px solid $grey-light;
-        width: 100%;
-    }
+  &.title {
+    border-bottom: 1px solid $grey-light;
+    width: 100%;
+  }
 }
 
 .glyphicon {
@@ -34,4 +34,8 @@ h1, h2, h3, h4, h5 {
     margin-top: -100px;
     margin-left: -100px;
   }
+}
+
+h1 {
+  margin-bottom:0;
 }

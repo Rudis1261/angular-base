@@ -2,7 +2,7 @@
 <html ng-app="app">
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Bootstrap</title>
+    <title>TV Tracker</title>
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32" />
@@ -10,6 +10,8 @@
 
   </head>
   <body ng-controller="menuCtrl" ng-click="dismissAll($event)">
+
+    <!-- NavBar / Header -->
     <header>
       <div class="navbar navbar-default navbar-fixed">
         <div class="navbar-container">
@@ -38,41 +40,46 @@
         </div>
       </div>
     </header>
+    <!-- NavBar / Header -->
+
+    <!-- Heading / Logo -->
+    <div class="text-center">
+      <h1>
+        <span class="icon-desktop"></span>
+        TV Tracker
+      </h1>
+    </div>
+    <!-- Heading / Logo -->
 
     <div class="container" ng-controller="indexCtrl">
-      <div class="loading-image__container" ng-hide="1">
+      <div class="loading-image__container" ng-hide="loaded">
         <img src="assets/img/loader-large.svg" />
       </div>
 
       <div class="ng-hide" ng-show="loaded">
-        <h1 class="title">Bootstrap</h1>
-        <label>Message:</label>
-        <input type="text" ng-model="message" placeholder="Test Message Binding" />
-        <h1>{{message}}!</h1>
-        <hr>
-        <div>
-          <span>Hidden: </span>
-          <span class="hidden-xs">(xs), </span>
-          <span class="hidden-sm">(sm), </span>
-          <span class="hidden-md">(md), </span>
-          <span class="hidden-lg">(lg)</span>
-        </div>
-        <div>
-          <span>Visible: </span>
-          <span class="visible-xs">(xs), </span>
-          <span class="visible-sm">(sm), </span>
-          <span class="visible-md">(md), </span>
-          <span class="visible-lg">(lg)</span>
+        <input type="text" ng-model="search" placeholder="Find show..." />
+        <p ng-if="search">Searching for <b>{{search}}</b>...</p>
+
+        <div class="series__item" ng-repeat="series in data.series|orderByProperty:'seriesname'">
+          <div class="series__holder">
+            <img ng-if="series.poster" ng-src="https://img.tvtracker.co.za/tv/{{series.poster | imageThumb}}" alt="{{series.seriesname}}" />
+            <img ng-if="!series.poster" ng-src="https://img.tvtracker.co.za/missing.png" alt="{{series.seriesname}}" />
+          </div>
         </div>
       </div>
     </div>
 
     <footer class="footer">
-      <div class="container">Just some footnotes</div>
+      <div class="container text-center">TV Tracker</div>
     </footer>
 
   <!-- Footer Scripts -->
   <script type="text/javascript" src="assets/vendor/angular/angular.min.js"></script>
+  <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.js"></script>
   <script type="text/javascript" src="app/app.js"></script>
+
+  <script type="text/javascript" src="app/components/menu.controller.js"></script>
+
+  <script type="text/javascript" src="app/components/filters.js"></script>
   </body>
 </html>

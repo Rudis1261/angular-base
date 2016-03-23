@@ -1,0 +1,51 @@
+.series {
+  $image-width: 120px;
+  $image-padding: 4px;
+  $image-height: ($image-width * 1.47);
+
+  &__item {
+    display: inline-block;
+    text-align: center;
+    margin: 0 1% 2%;
+    width: 48%;
+    padding: 1px;
+
+    @include respond-between('sm','lg') {
+      width: 23%;
+      margin: 0 1% 1%;
+    }
+    @include respond-from('lg') {
+      width: 23%;
+      margin: 0 1% 1%;
+    }
+
+    @include respond-between('xs','sm') {
+      width: 31%;
+      margin: 0 1% 1%;
+    }
+
+    @include respond-between('min','xs') {
+      width: 48%;
+    }
+  }
+
+  &__holder {
+    background: $white;
+    padding: $image-padding;
+    border: 1px solid $grey-light;
+    box-shadow: 1px 1px 3px $grey-lightest;
+    @include border-radius(4px);
+
+    &:last-of-type {
+      @extend clear-fix;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 0;
+      display: block;
+    }
+  }
+}
