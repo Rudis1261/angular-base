@@ -9,44 +9,62 @@
     <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16" />
 
   </head>
-  <body ng-controller="indexCtrl">
+  <body ng-controller="menuCtrl" ng-click="dismissAll($event)">
     <header>
       <div class="navbar navbar-default navbar-fixed">
         <div class="navbar-container">
-          <ul class="hidden-sm">
-            <li>
-              <i class="glyphicon glyphicon-home"></i>
-              Home
-            </li>
-            <li>
-              <i class="glyphicon glyphicon-info-sign"></i>
-              About
+          <!-- Desktop -->
+          <ul class="hidden-sm" ng-repeat="menu in menus">
+            <li title="{{menu.title}}" ng-click="shout(menu.title)">
+              <i class="glyphicon glyphicon-{{menu.icon}}"></i>
+              {{menu.html}}
             </li>
           </ul>
-          <ul class="visible-sm burger-menu">
+
+          <!-- Mobile -->
+          <ul class="hidden-md burger-menu" ng-click="toggleMenu()" ng-class="{active:menuOpen}">
             <li class="burger-menu__slice"></li>
             <li class="burger-menu__slice"></li>
             <li class="burger-menu__slice"></li>
           </ul>
+          <div class="hidden-md burger-menu__content" ng-class="{open:menuOpen, closed:!menuOpen}">
+            <ul ng-repeat="menu in menus">
+              <li title="{{menu.title}}" ng-click="shout(menu.title)">
+                <i class="glyphicon glyphicon-{{menu.icon}}"></i>
+                {{menu.html}}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
 
-    <div class="container text-center" ng-hide="1">
-      <img src="assets/img/loader-large.svg" />
-    </div>
+    <div class="container" ng-controller="indexCtrl">
+      <div class="loading-image__container" ng-hide="1">
+        <img src="assets/img/loader-large.svg" />
+      </div>
 
-    <div class="container ng-hide" ng-show="loaded">
-      <h1 class="title">Bootstrap</h1>
-      <label>Message:</label>
-      <input type="text" ng-model="message" placeholder="Test Message Binding" />
-      <hr>
-      <h1>Hello {{message}}!</h1>
-      <h2>Hello {{message}}!</h2>
-      <h3>Hello {{message}}!</h3>
-      <h4>Hello {{message}}!</h4>
-      <h5>Hello {{message}}!</h5>
-      <p>Paragraph {{message}}!</p>
+      <div class="ng-hide" ng-show="loaded">
+        <h1 class="title">Bootstrap</h1>
+        <label>Message:</label>
+        <input type="text" ng-model="message" placeholder="Test Message Binding" />
+        <h1>{{message}}!</h1>
+        <hr>
+        <div>
+          <span>Hidden: </span>
+          <span class="hidden-xs">(xs), </span>
+          <span class="hidden-sm">(sm), </span>
+          <span class="hidden-md">(md), </span>
+          <span class="hidden-lg">(lg)</span>
+        </div>
+        <div>
+          <span>Visible: </span>
+          <span class="visible-xs">(xs), </span>
+          <span class="visible-sm">(sm), </span>
+          <span class="visible-md">(md), </span>
+          <span class="visible-lg">(lg)</span>
+        </div>
+      </div>
     </div>
 
     <footer class="footer">

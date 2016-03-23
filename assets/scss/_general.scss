@@ -1,62 +1,99 @@
 .container {
-    margin: 0 auto;
-    max-width: $desktop;
-    padding: 15px;
+  margin: 0 auto;
+  max-width: $desktop;
+  padding: 15px;
+
+  & > .container {
+    padding: 0;
+  }
 }
 
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
-.hidden, .ng-hide {
-    display: none;
-}
-
-.hidden-xs {
-  @include respond-to('xs') {
-    display: none;
-  }
-}
-
-.hidden-sm {
-  @include respond-to('sm') {
-    display: none;
-  }
-}
-
-.hidden-md {
-  @include respond-to('md') {
-    display: none;
-  }
-}
-
-.hidden-lg {
-  @include respond-to('lg') {
-    display: none;
-  }
-}
-
-.visible-xs {
-  @include respond-to('xs') {
-    display: block;
-  }
-}
-
-.visible-sm {
-  @include respond-to('sm') {
-    display: block;
-  }
-}
-
-.visible-md {
-  @include respond-to('md') {
-    display: block;
-  }
-}
-
+.hidden,
+.ng-hide,
+.visible-xs,
+.visible-sm,
+.visible-md,
 .visible-lg {
-  @include respond-to('lg') {
-    display: block;
+  display: none;
+}
+
+// Hidden SM
+@include respond-to('sm') {
+  .hidden-sm {
+    display: none;
+  }
+}
+@include respond-between('min','sm') {
+  .hidden-sm {
+    display: none;
+  }
+}
+
+// Hidden XS
+@include respond-between('min','xs') {
+  .hidden-xs {
+    display: none;
+  }
+}
+
+// Hidden MD
+@include respond-between('sm','md') {
+  .hidden-md {
+    display: none;
+  }
+}
+@include respond-from('md') {
+  .hidden-md {
+    display: none;
+  }
+}
+
+// Hidden LG
+@include respond-from('lg') {
+  .hidden-lg {
+    display: none;
+  }
+}
+
+// Visible XS
+@include respond-between('min','xs') {
+  .visible-xs {
+    display: initial;
+  }
+}
+
+// Visible SM
+@include respond-between('xs','sm') {
+  .visible-sm {
+    display: initial;
+  }
+}
+@include respond-to('sm') {
+  .visible-sm {
+    display: initial;
+  }
+}
+
+// Visible MD
+ @include respond-between('sm','md') {
+  .visible-md {
+    display: initial;
+  }
+}
+@include respond-from('md') {
+  .visible-md {
+    display: initial;
+  }
+}
+
+// Visible LG
+@include respond-from('lg') {
+  .visible-lg {
+    display: initial;
   }
 }
 

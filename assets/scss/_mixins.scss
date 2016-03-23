@@ -1,5 +1,6 @@
 /// @type Map
 $break-min: (
+  'min': (min-width: 1px),
   'xs': (min-width: $screen-xs),
   'sm': (min-width: $screen-sm),
   'md': (min-width: $screen-md),
@@ -8,6 +9,7 @@ $break-min: (
 
 /// @type Map
 $break-max: (
+  'min': (min-width: 1px),
   'xs': (max-width: $screen-xs),
   'sm': (max-width: $screen-sm),
   'md': (max-width: $screen-md),
@@ -22,7 +24,7 @@ $break-max: (
     + "Please make sure it is defined in `$break-min` map.";
   }
 
-  @media #{inspect($media)} {
+  @media only #{inspect($media)} {
     @content;
   }
 }
@@ -35,26 +37,26 @@ $break-max: (
     + "Please make sure it is defined in `$break-max` map.";
   }
 
-  @media #{inspect($media)} {
+  @media only #{inspect($media)} {
     @content;
   }
 }
 
 @mixin respond-between($from, $to) {
-  $mediaFrom: map-get($break-min, $from);
-  $mediaTo: map-get($break-max, $to);
+  $media-from: map-get($break-min, $from);
+  $media-to: map-get($break-max, $to);
 
-  @if not $mediaFrom {
-    @error "No query could be retrieved from `#{$breakpoint}`. "
+  @if not $media-from {
+    @error "No query could be retrieved from `#{$from}`. "
     + "Please make sure it is defined in `$break-min` map.";
   }
 
-  @if not $mediaTo {
-    @error "No query could be retrieved from `#{$breakpoint}`. "
+  @if not $media-to {
+    @error "No query could be retrieved from `#{$to}`. "
     + "Please make sure it is defined in `$break-max` map.";
   }
 
-  @media #{inspect($mediaFrom)} and #{inspect($mediaTo)} {
+  @media only #{inspect($media-from)} and #{inspect($media-to)} {
     @content;
   }
 }
@@ -63,4 +65,29 @@ $break-max: (
   -webkit-border-radius: $size;
   -moz-border-radius: $size;
   border-radius: $size;
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+%clearfix {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
 }

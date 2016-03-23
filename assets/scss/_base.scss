@@ -25,3 +25,13 @@ h1, h2, h3, h4, h5 {
   min-width: 20px;
   text-align: left;
 }
+
+.loading-image__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  img {
+    margin-top: -100px;
+    margin-left: -100px;
+  }
+}

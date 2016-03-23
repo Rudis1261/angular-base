@@ -44,7 +44,7 @@ header {
     }
 
     // Mobile / Tablet menus
-    @include respond-between('xs','sm') {
+    @include respond-between('min','sm') {
 
       & > .navbar-container {
         padding-left: 0;
@@ -53,17 +53,19 @@ header {
       .burger-menu {
         $padding: 14px;
         cursor: pointer;
+        background: $navbar;
         width: $navbar-height;
         padding: $padding 0 0 ($padding - 4px);
         height: $navbar-height;
         text-align: center;
         border-right: 1px solid $black;
 
-        &:hover {
+        &.active {
           background: #333;
           color: $white;
         }
 
+        // Burger menu slices
         &__slice {
           display: block;
           background: $grey-lightest;
@@ -78,6 +80,51 @@ header {
 
           &:hover {
             background: $white;
+          }
+        }
+
+        // Navbar menus
+        &__content {
+          width: 0;
+          background: $grey-lightest;
+          height: 100%;
+          top: $navbar-height;
+          display: block;
+          position: fixed;
+          top: 50px;
+          left: -90%;
+          width: 85%;
+          box-shadow: 1px 1px 5px $grey;
+          border: 1px solid $white;
+          border-right: 1px solid $grey;
+          border-bottom: 1px solid $grey;
+          overflow: none;
+          @include transition(left 0.3s ease);
+
+          &.closed {
+            left: -90%;
+          }
+
+          &.open {
+            padding: 0;
+            left: 0%;
+          }
+
+          li {
+            width: 100%;
+            color: $grey-dark;
+            border: none;
+            border-bottom: 1px solid $grey-light;
+            border-top: 1px solid $white;
+
+            &:first-of-type {
+              border-top: none;
+            }
+
+            &:hover, &:active {
+              color: $grey;
+              background: $grey-lightest;
+            }
           }
         }
       }
