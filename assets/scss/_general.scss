@@ -45,9 +45,15 @@
   .hidden-md {
     display: none;
   }
+  .hidden-lg {
+    display: none;
+  }
 }
 @include respond-from('md') {
   .hidden-md {
+    display: none;
+  }
+  .hidden-lg {
     display: none;
   }
 }

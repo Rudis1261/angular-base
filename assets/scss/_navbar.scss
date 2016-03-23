@@ -3,6 +3,7 @@ header {
     width: 100%;
     height: $navbar-height;
     line-height: $navbar-height;
+    overflow: hidden;
 
     &.navbar-default {
       background: $navbar;
