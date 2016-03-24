@@ -10,7 +10,7 @@
     width: 48%;
     padding: 1px;
 
-    @include respond-between('sm','lg') {
+    @include respond-between('md','lg') {
       width: 23%;
       margin: 0 1% 1%;
     }
@@ -19,12 +19,12 @@
       margin: 0 1% 1%;
     }
 
-    @include respond-between('xs','sm') {
+    @include respond-between('sm','md') {
       width: 31%;
       margin: 0 1% 1%;
     }
 
-    @include respond-between('min','xs') {
+    @include respond-between('min','sm') {
       width: 48%;
     }
   }
@@ -47,5 +47,24 @@
       padding: 0;
       display: block;
     }
+  }
+
+  &__title {
+    $series-title-height: 30px;
+    position: relative;
+    line-height: $series-title-height;
+    font-size: 14px;
+    overflow: hidden;
+    height: $series-title-height;
+    margin-bottom: -$series-title-height;
+    color: $black;
+    font-weight: bold;
+    @include opacity(0.8);
+  }
+
+  &__background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 }

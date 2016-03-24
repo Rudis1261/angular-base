@@ -5,6 +5,7 @@ var app = angular.module("app", ['ngResource']);
         $scope.search = "";
         $scope.loaded = false;
         $scope.data = {};
+        $scope.titleLength = 13;
 
         var seriesData = $scope.series;
         var apiEndpoint = "https://tvtracker.co.za/api/0.1";
@@ -15,7 +16,7 @@ var app = angular.module("app", ['ngResource']);
             $scope.loaded = true;
         });
 
-        $scope.filterSeries = function() {
+        $scope.searchTerm = function() {
 
         };
     }]);

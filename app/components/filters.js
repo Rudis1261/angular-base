@@ -1,7 +1,27 @@
 // Get the thumbnail image from the name
 app.filter('imageThumb', function() {
   return function(item) {
-    return item.replace(/(\.jpg)/i, '_thumb.jpg');
+    if (!item || item == "") {
+      return "https://img.tvtracker.co.za/missing.png";
+    }
+    return "https://img.tvtracker.co.za/tv/" + item.replace(/(\.jpg)/i, '_thumb.jpg');
+  };
+});
+
+// Find show
+app.filter('searchTerm', function() {
+  return function(items, term, reverse) {
+    if (!term || term == "") {
+      return items;
+    }
+    term = term.toLowerCase();
+    var filtered = [];
+    angular.forEach(items, function(item) {
+      if (item.seriesname.toLowerCase().indexOf(term) !== -1 || item.overview.toLowerCase().indexOf(term) !== -1) {
+        filtered.push(item);
+      }
+    });
+    return filtered;
   };
 });
 

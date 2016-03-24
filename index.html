@@ -15,6 +15,7 @@
     <header>
       <div class="navbar navbar-default navbar-fixed">
         <div class="navbar-container">
+
           <!-- Desktop -->
           <ul class="hidden-sm" ng-repeat="menu in menus">
             <li title="{{menu.title}}" ng-click="shout(menu.title)">
@@ -24,11 +25,17 @@
           </ul>
 
           <!-- Mobile -->
+          <div class="visible-sm" style="position: fixed; height: 50px; left: 60px; color: white; font-size: 19px;">
+            <span class="icon-desktop"></span>
+            <span>TV Tracker</span>
+          </div>
+
           <ul class="hidden-md burger-menu" ng-click="toggleMenu()" ng-class="{active:menuOpen}">
             <li class="burger-menu__slice"></li>
             <li class="burger-menu__slice"></li>
             <li class="burger-menu__slice"></li>
           </ul>
+
           <div class="hidden-md burger-menu__content" ng-class="{open:menuOpen, closed:!menuOpen}">
             <ul ng-repeat="menu in menus">
               <li title="{{menu.title}}" ng-click="shout(menu.title)">
@@ -43,7 +50,7 @@
     <!-- NavBar / Header -->
 
     <!-- Heading / Logo -->
-    <div class="text-center">
+    <div class="text-center hidden-sm">
       <h1>
         <span class="icon-desktop"></span>
         TV Tracker
@@ -57,20 +64,33 @@
       </div>
 
       <div class="ng-hide" ng-show="loaded">
-        <input type="text" ng-model="search" placeholder="Find show..." />
+        <input type="text" ng-model="search" ng-bind="searchTerm()" placeholder="Find show..." />
         <p ng-if="search">Searching for <b>{{search}}</b>...</p>
 
-        <div class="series__item" ng-repeat="series in data.series|orderByProperty:'seriesname'">
+        <div class="series__item" ng-repeat="series in data.series|orderByProperty:'seriesname'|searchTerm:search">
           <div class="series__holder">
-            <img ng-if="series.poster" ng-src="https://img.tvtracker.co.za/tv/{{series.poster | imageThumb}}" alt="{{series.seriesname}}" />
-            <img ng-if="!series.poster" ng-src="https://img.tvtracker.co.za/missing.png" alt="{{series.seriesname}}" />
+
+            <div class="series__title">
+              {{series.seriesname}}
+            </div>
+
+            <div class="series__background" style="background-image: url('{{series.poster | imageThumb}}')">
+              <img
+                src="https://tvtracker.co.za/assets/img/overlay.png"
+                alt="{{series.seriesname}}"
+              />
+            </div>
+
           </div>
         </div>
       </div>
     </div>
 
     <footer class="footer">
-      <div class="container text-center">TV Tracker</div>
+      <div class="container text-center">
+        <span class="icon-desktop"></span>
+        TV Tracker
+      </div>
     </footer>
 
   <!-- Footer Scripts -->
@@ -79,7 +99,7 @@
   <script type="text/javascript" src="app/app.js"></script>
 
   <script type="text/javascript" src="app/components/menu.controller.js"></script>
-
   <script type="text/javascript" src="app/components/filters.js"></script>
+  <script type="text/javascript" src="app/components/directives.js"></script>
   </body>
 </html>
