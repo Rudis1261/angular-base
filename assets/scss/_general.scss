@@ -3,6 +3,10 @@
   max-width: $desktop;
   padding: 15px;
 
+  &-sm {
+    padding: 10px;
+  }
+
   & > .container {
     padding: 0;
   }

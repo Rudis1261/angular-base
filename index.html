@@ -8,6 +8,11 @@
     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16" />
 
+    <!-- Mobile Tab Colors -->
+    <meta name="theme-color" content="#333">
+    <meta name="msapplication-navbutton-color" content="#333">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#333">
+    <!-- Mobile Tab Colors -->
   </head>
   <body ng-controller="menuCtrl" ng-click="dismissAll($event)">
 
@@ -60,28 +65,39 @@
 
     <div class="container" ng-controller="indexCtrl">
       <div class="loading-image__container" ng-hide="loaded">
-        <img src="assets/img/loader-large.svg" />
+        <img src="assets/img/loader-large.gif" />
       </div>
 
       <div class="ng-hide" ng-show="loaded">
-        <input type="text" ng-model="search" ng-bind="searchTerm()" placeholder="Find show..." />
+        <div>
+        <div class="add-on series__input">
+          <input type="text" ng-model="search" ng-bind="searchTerm()" placeholder="Find show..." />
+          <i ng-if="search" ng-click="clear('search')" class="glyphicon glyphicon-trash"></i>
+        </div>
+        </div>
+
         <p ng-if="search">Searching for <b>{{search}}</b>...</p>
 
-        <div class="series__item" ng-repeat="series in data.series|orderByProperty:'seriesname'|searchTerm:search">
+        <div class="series__item" ng-repeat="series in filteredSeries = (data.series|seriesFilterByPropertyAndTerm:'seriesname':search)">
           <div class="series__holder">
-
             <div class="series__title">
               {{series.seriesname}}
             </div>
 
-            <div class="series__background" style="background-image: url('{{series.poster | imageThumb}}')">
+            <div
+              class="series__background"
+              style="background-image: url('{{series.poster | imageThumb}}')"
+            >
               <img
                 src="https://tvtracker.co.za/assets/img/overlay.png"
                 alt="{{series.seriesname}}"
               />
             </div>
-
           </div>
+        </div>
+
+        <div ng-hide="filteredSeries.length">
+          <strong>No shows found</strong>
         </div>
       </div>
     </div>

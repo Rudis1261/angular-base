@@ -83,8 +83,9 @@ $break-max: (
 
 %clearfix {
   *zoom: 1;
-  &:before, &:after {
-    content: " ";
+  &:before,
+  &:after {
+    content: "";
     display: table;
   }
   &:after {

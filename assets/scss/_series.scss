@@ -3,29 +3,46 @@
   $image-padding: 4px;
   $image-height: ($image-width * 1.47);
 
+  &__input {
+    padding: 0 5px;
+    // input {
+    //   float: initial;
+    //   margin-right: -40px;
+    //   margin: 0 auto 10px;
+    // }
+  }
+
   &__item {
     display: inline-block;
     text-align: center;
     margin: 0 1% 2%;
     width: 48%;
     padding: 1px;
+    //border: 3px solid red;
 
+    // Desktop
+    @include respond-from('lg') {
+      width: 18%;
+      margin: 0 1% 1%;
+      border-color: lime;
+    }
+
+    // Tablet to Desktop
     @include respond-between('md','lg') {
       width: 23%;
       margin: 0 1% 1%;
+      border-color: purple;
     }
-    @include respond-from('lg') {
+    @include respond-between('sm','md') {
       width: 23%;
       margin: 0 1% 1%;
+      border-color: purple;
     }
 
-    @include respond-between('sm','md') {
-      width: 31%;
-      margin: 0 1% 1%;
-    }
-
+    // Phones
     @include respond-between('min','sm') {
       width: 48%;
+      border-color: orange;
     }
   }
 
@@ -66,5 +83,33 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+  }
+}
+
+.add-on {
+
+  @extend %clearfix;
+  $add-on-width: 40px;
+
+  input {
+    float: left;
+    margin-right: -$add-on-width;
+  }
+
+  i, a {
+    display: inline-block;
+    float: left;
+    height: $add-on-width;
+    margin-top: 9px;
+    background: white;
+    width: $add-on-width;
+    text-align: center;
+    line-height: $add-on-width;
+    border-radius: 5px;
+    border: 1px solid #C5C5C5;
+
+    &:hover, &a:active {
+      background: $grey-lightest;
+    }
   }
 }
