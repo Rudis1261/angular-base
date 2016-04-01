@@ -116,11 +116,13 @@ header {
             left: 0%;
           }
 
-          a {
-            color: $navbar-color;
-          }
-
           li {
+
+            a {
+              display: block;
+              color: $grey-dark!important;
+            }
+
             width: 100%;
             color: $grey-dark;
             border: none;

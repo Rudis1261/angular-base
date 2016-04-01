@@ -1,6 +1,14 @@
-<div class="container" ng-controller="indexCtrl">
+<div class="container" ng-controller="indexCtrl" scroll>
   <div class="loading-image__container" ng-hide="loaded">
     <img src="assets/img/loader-large.gif" />
+  </div>
+
+  <div
+    ng-click="scrollToTheTop()"
+    ng-hide="!scrollToTop"
+   style="position: fixed; z-index: 1001; right: 20px; bottom: 20px; opacity: 0.8; width: 40px; height: 40px; background: white; color: black; border: 2px solid black; line-height: 40px; text-align: center;"
+   >
+    <i class="glyphicon glyphicon-arrow-up"></i>
   </div>
 
   <div class="ng-hide" ng-show="loaded">
@@ -15,7 +23,7 @@
 
     <div
       class="series__item"
-      ng-repeat="series in filteredSeries = (data.series|seriesFilterByPropertyAndTerm:'seriesname':search)"
+      ng-repeat="series in filteredSeries = (data.series|seriesFilterByPropertyAndTerm:'seriesname':search|limitTo:paging)"
     >
       <a href="/detail/{{series.seriesname|slugify}}/{{series.seriesid}}">
         <div class="series__holder">
@@ -44,6 +52,10 @@
 
     <div ng-hide="filteredSeries.length">
       <strong>No shows found</strong>
+    </div>
+
+    <div ng-click="pageUp()" class="text-center">
+      <h1>Load more</h1>
     </div>
   </div>
 </div>

@@ -6,10 +6,23 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
         $scope.data = {};
         $scope.loaded = false;
         $scope.titleLength = 13;
+        $scope.perpage = 60;
+        $scope.page = 1;
+        $scope.paging = $scope.perpage * $scope.page;
+        $scope.scrollToTop = false;
 
         // Clear an input
         $scope.clear = function(input) {
             $scope[input] = "";
+        };
+
+        $scope.scrollToTheTop = function() {
+            window.scrollTo(0, 0);
+        };
+
+        $scope.pageUp = function() {
+            $scope.page++;
+            $scope.paging = $scope.perpage * $scope.page;
         };
 
         $scope.location = $route.current;
