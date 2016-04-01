@@ -4,6 +4,11 @@ header {
     height: $navbar-height;
     line-height: $navbar-height;
 
+    a {
+      text-decoration: none;
+      color: $white;
+    }
+
     &.navbar-default {
       background: $navbar;
       border-bottom: 1px solid $black;
@@ -109,6 +114,10 @@ header {
           &.open {
             padding: 0;
             left: 0%;
+          }
+
+          a {
+            color: $navbar-color;
           }
 
           li {

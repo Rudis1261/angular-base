@@ -1,7 +1,7 @@
-var app = angular.module("app", ['api']);
+var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
 
     // Index Controller
-    app.controller("indexCtrl", ["$scope", "shows", function($scope, shows) {
+    app.controller("indexCtrl", ["$scope", "$route", "shows", function($scope, $route, shows) {
         $scope.search = "";
         $scope.data = {};
         $scope.loaded = false;
@@ -11,6 +11,8 @@ var app = angular.module("app", ['api']);
         $scope.clear = function(input) {
             $scope[input] = "";
         };
+
+        $scope.location = $route.current;
 
         // Load the content from the API
         shows.get({}, function(series){

@@ -33,3 +33,17 @@ app.filter('seriesFilterByPropertyAndTerm', function() {
     return filtered;
   };
 });
+
+// Slug
+app.filter('slugify', function() {
+  return function(input) {
+    if (!input) {
+      return "";
+    }
+    var segments = input.toLowerCase().split(" ");
+    angular.forEach(segments, function(segment, index) {
+      segments[index] = segments[index].replace(/\W/g, '');
+    });
+    return segments.join("-");
+  };
+});

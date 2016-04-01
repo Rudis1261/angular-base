@@ -23,5 +23,6 @@ app.controller("menuCtrl", ["$scope", "$log", function($scope, $log) {
         html: "Home",
         title: "Go to the home screen",
         icon: "home",
+        href: "/"
     }];
 }]);

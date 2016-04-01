@@ -5,14 +5,15 @@
 
   &__input {
     padding: 0 5px;
-    // input {
-    //   float: initial;
-    //   margin-right: -40px;
-    //   margin: 0 auto 10px;
-    // }
   }
 
   &__item {
+
+    a {
+      text-decoration: none!important;
+      color: $white;
+    }
+
     display: inline-block;
     text-align: center;
     margin: 0 1% 2%;
@@ -47,6 +48,7 @@
   }
 
   &__holder {
+
     background: $white;
     padding: $image-padding;
     border: 1px solid $grey-light;
@@ -63,6 +65,54 @@
       border: none;
       padding: 0;
       display: block;
+    }
+  }
+
+  &__status {
+    @include opacity(0.6);
+    $triangle-size: 22px;
+    height: $triangle-size;
+    margin-top: -$triangle-size;
+    font-size: 10px;
+    color: $white;
+    line-height: $triangle-size;
+
+    &:after {
+      display: inline-block;
+      content: "";
+      width: 0;
+      height: 0;
+      float: right;
+      border-style: solid;
+      border-width: 0 0 $triangle-size $triangle-size;
+      border-color: transparent transparent $blue transparent;
+    }
+    &--off {
+      &:after {
+        border-color: transparent transparent $red transparent;
+      }
+    }
+
+    &:before {
+      font-weight: bold;
+      @extend .glyphicon;
+      @extend .glyphicon-ok;
+      width: $triangle-size;
+      text-align: center;
+      float: right;
+      color: $white;
+      margin-left: -($triangle-size - 3px);
+      margin-right: -3px;
+      line-height: ($triangle-size + 6px);
+      font-size: ($triangle-size / 2);
+    }
+    &--off {
+      &:before {
+        margin-left: -($triangle-size - 4px);
+        margin-right: -4px;
+        line-height: ($triangle-size + 8px);
+        @extend .glyphicon-remove;
+      }
     }
   }
 

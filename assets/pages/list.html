@@ -1,0 +1,49 @@
+<div class="container" ng-controller="indexCtrl">
+  <div class="loading-image__container" ng-hide="loaded">
+    <img src="assets/img/loader-large.gif" />
+  </div>
+
+  <div class="ng-hide" ng-show="loaded">
+    <div>
+    <div class="add-on series__input">
+      <input type="text" ng-model="search" ng-bind="searchTerm()" placeholder="Find show..." />
+      <i ng-if="search" ng-click="clear('search')" class="glyphicon glyphicon-trash"></i>
+    </div>
+    </div>
+
+    <p ng-if="search">Searching for <b>{{search}}</b>...</p>
+
+    <div
+      class="series__item"
+      ng-repeat="series in filteredSeries = (data.series|seriesFilterByPropertyAndTerm:'seriesname':search)"
+    >
+      <a href="/detail/{{series.seriesname|slugify}}/{{series.seriesid}}">
+        <div class="series__holder">
+          <div class="series__title">
+            {{series.seriesname}}
+          </div>
+
+          <div
+            class="series__background"
+            style="background-image: url('{{series.poster | imageThumb}}')"
+          >
+            <img
+              src="https://tvtracker.co.za/assets/img/overlay.png"
+              alt="{{series.seriesname}}"
+            />
+          </div>
+
+          <div
+            title={{series.status}}
+            class="series__status"
+            ng-class="{'series__status--off':series.status=='Ended','series__status--on':series.status=='Continuing'}"
+          ></div>
+        </div>
+      </div>
+    </a>
+
+    <div ng-hide="filteredSeries.length">
+      <strong>No shows found</strong>
+    </div>
+  </div>
+</div>

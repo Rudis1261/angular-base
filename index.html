@@ -1,6 +1,7 @@
 <!doctype html>
 <html ng-app="app">
   <head>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>TV Tracker</title>
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
@@ -13,6 +14,9 @@
     <meta name="msapplication-navbutton-color" content="#333">
     <meta name="apple-mobile-web-app-status-bar-style" content="#333">
     <!-- Mobile Tab Colors -->
+
+    <!-- Set that base -->
+    <base href="/">
   </head>
   <body ng-controller="menuCtrl" ng-click="dismissAll($event)">
 
@@ -23,16 +27,20 @@
 
           <!-- Desktop -->
           <ul class="hidden-sm" ng-repeat="menu in menus">
-            <li title="{{menu.title}}" ng-click="shout(menu.title)">
-              <i class="glyphicon glyphicon-{{menu.icon}}"></i>
-              <span ng-bind="menu.html">Loading</span>
+            <li title="{{menu.title}}">
+              <a href="{{menu.href}}">
+                <i class="glyphicon glyphicon-{{menu.icon}}"></i>
+                <span ng-bind="menu.html">Loading</span>
+              </a>
             </li>
           </ul>
 
           <!-- Mobile -->
           <div class="visible-sm" style="position: fixed; height: 50px; left: 60px; color: white; font-size: 19px;">
-            <span class="icon-desktop"></span>
-            <span>TV Tracker</span>
+            <a href="/">
+              <span class="icon-desktop"></span>
+              <span>TV Tracker</span>
+            </a>
           </div>
 
           <ul class="hidden-md burger-menu" ng-click="toggleMenu()" ng-class="{active:menuOpen}">
@@ -43,65 +51,33 @@
 
           <div class="hidden-md burger-menu__content" ng-class="{open:menuOpen, closed:!menuOpen}">
             <ul ng-repeat="menu in menus">
-              <li title="{{menu.title}}" ng-click="shout(menu.title)">
-                <i class="glyphicon glyphicon-{{menu.icon}}"></i>
-                {{menu.html}}
+              <li title="{{menu.title}}">
+                <a href="{{menu.href}}">
+                  <i class="glyphicon glyphicon-{{menu.icon}}"></i>
+                  {{menu.html}}
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </header>
-    <!-- NavBar / Header -->
+    <!-- NAVBAR / HEADER -->
 
-    <!-- Heading / Logo -->
+    <!-- HEADING / LOGO -->
     <div class="text-center hidden-sm">
       <h1>
         <span class="icon-desktop"></span>
         TV Tracker
       </h1>
     </div>
-    <!-- Heading / Logo -->
+    <!-- HEADING / LOGO -->
 
-    <div class="container" ng-controller="indexCtrl">
-      <div class="loading-image__container" ng-hide="loaded">
-        <img src="assets/img/loader-large.gif" />
-      </div>
+    <!-- CONTENT -->
+    <div ng-view></div>
+    <!-- CONTENT -->
 
-      <div class="ng-hide" ng-show="loaded">
-        <div>
-        <div class="add-on series__input">
-          <input type="text" ng-model="search" ng-bind="searchTerm()" placeholder="Find show..." />
-          <i ng-if="search" ng-click="clear('search')" class="glyphicon glyphicon-trash"></i>
-        </div>
-        </div>
-
-        <p ng-if="search">Searching for <b>{{search}}</b>...</p>
-
-        <div class="series__item" ng-repeat="series in filteredSeries = (data.series|seriesFilterByPropertyAndTerm:'seriesname':search)">
-          <div class="series__holder">
-            <div class="series__title">
-              {{series.seriesname}}
-            </div>
-
-            <div
-              class="series__background"
-              style="background-image: url('{{series.poster | imageThumb}}')"
-            >
-              <img
-                src="https://tvtracker.co.za/assets/img/overlay.png"
-                alt="{{series.seriesname}}"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div ng-hide="filteredSeries.length">
-          <strong>No shows found</strong>
-        </div>
-      </div>
-    </div>
-
+    <!-- FOOTER -->
     <footer class="footer">
       <div class="container text-center">
         <span class="icon-desktop"></span>
@@ -109,14 +85,16 @@
       </div>
     </footer>
 
-  <!-- Footer Scripts -->
   <script type="text/javascript" src="assets/vendor/angular/angular.min.js"></script>
-  <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.js"></script>
+  <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.min.js"></script>
+  <script type="text/javascript" src="assets/vendor/ng-fastclick/dist/index.min.js"></script>
+  <script type="text/javascript" src="assets/vendor/angular-route/angular-route.min.js"></script>
   <script type="text/javascript" src="app/app.js"></script>
 
   <script type="text/javascript" src="app/components/menu.controller.js"></script>
   <script type="text/javascript" src="app/components/filters.js"></script>
   <script type="text/javascript" src="app/components/directives.js"></script>
+  <script type="text/javascript" src="app/components/services/routes.js"></script>
   <script type="text/javascript" src="app/components/services/data.js"></script>
   </body>
 </html>
