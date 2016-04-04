@@ -5,6 +5,14 @@ angular.module('routing', ['ngRoute'])
         templateUrl: 'assets/pages/list.html',
         controller: 'indexCtrl'
       })
+      .when('/login', {
+        templateUrl: 'assets/pages/login.html',
+        controller: 'loginCtrl'
+      })
+      .when('/failure', {
+        templateUrl: 'assets/pages/failure.html',
+        controller: 'indexCtrl'
+      })
       .when('/detail/:showName/:showId', {
         templateUrl: 'assets/pages/detail.html',
         controller: 'indexCtrl'
