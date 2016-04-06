@@ -15,15 +15,30 @@ app.directive('hires', function() {
   };
 });
 
+// Bind scrolltop functionality
 app.directive("scroll", function ($window) {
     return function(scope, element, attrs) {
-        angular.element($window).bind("scroll", function() {
+        angular.element($window).bind("scroll", _.throttle(function() {
             if (this.pageYOffset >= 300) {
                 scope.scrollToTop = true;
             } else {
                 scope.scrollToTop = false;
             }
             scope.$apply();
-        });
+        }, 100));
+    };
+});
+
+// Toggle Active Class on btn
+app.directive('addClass', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', function() {
+                if(element.attr("class") !== "active") {
+                    element.addClass(attrs.addClass);
+                }
+            });
+        }
     };
 });

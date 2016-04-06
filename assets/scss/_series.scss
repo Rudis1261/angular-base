@@ -1,3 +1,20 @@
+.scroll-to-top {
+  position: fixed;
+  z-index: 1001;
+  right: 20px;
+  bottom: 20px;
+  @include opacity(0.8);
+  width: 40px;
+  height: 40px;
+  background: $white;
+  color: $black;
+  border: 2px solid $black;
+  line-height: 40px;
+  text-align: center;
+  box-shadow: 2px 1px 4px $grey;
+  @include border-radius(4px);
+}
+
 .series {
   $image-width: 120px;
   $image-padding: 4px;

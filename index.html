@@ -74,7 +74,11 @@
     <!-- HEADING / LOGO -->
 
     <!-- CONTENT -->
-    <div ng-view></div>
+    <div ng-view>
+      <div class="loading-image__container" ng-hide="loaded">
+        <img src="assets/img/loader-large.gif" />
+      </div>
+    </div>
     <!-- CONTENT -->
 
     <!-- FOOTER -->
@@ -86,6 +90,7 @@
     </footer>
 
   <script type="text/javascript" src="assets/vendor/angular/angular.min.js"></script>
+  <script type="text/javascript" src="assets/vendor/underscore/underscore-min.js"></script>
   <!--<script type="text/javascript" src="assets/vendor/angular-jwt/dist/angular-jwt.min.js"></script>-->
   <script type="text/javascript" src="assets/vendor/angular-resource/angular-resource.min.js"></script>
   <script type="text/javascript" src="assets/vendor/ng-fastclick/dist/index.min.js"></script>

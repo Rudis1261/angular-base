@@ -35,12 +35,17 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
         };
 
         $scope.location = $route.current;
-
-        console.log("Application Fired Up", Date.now());
+        $scope.showId = $route.current.params.showId || false;
 
         // Load the content from the API
         shows.get({}, function(series){
             $scope.data = series.data;
+            console.log($scope.data);
+
+            if ($scope.showId) {
+                $scope.data = $scope.data.series;
+            }
+
             $scope.loaded = true;
             localStorage.setItem('series', JSON.stringify(series));
         // Failure

@@ -1,4 +1,11 @@
-<h1>Time TO DISPLAY SOME DETAIL</h1>
-<a href="/">Back</a>
+<div class="loading-image__container" ng-hide="loaded">
+  <img src="assets/img/loader-large.gif" />
+</div>
 
-{{location.params}}
+<a class="btn btn-block" addClass="active" href="/">Back</a>
+{{showId}}
+<div ng-if="showId">
+    <div ng-repeat="show in data | filter: {seriesid: showId}">
+        {{show.seriesname}}
+    </div>
+</div>

@@ -47,3 +47,17 @@ app.filter('slugify', function() {
     return segments.join("-");
   };
 });
+
+
+// Property Ordering
+app.filter('seriesById', function() {
+  return function(items, id) {
+    angular.forEach(items, function(item) {
+      console.log("sid: ", item.seriesid, "id: ", id, (item.seriesid == id));
+      if (item.seriesid == id) {
+        console.log("filtered: ", item);
+        return item;
+      }
+    });
+  };
+});

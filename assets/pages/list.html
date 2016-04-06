@@ -1,12 +1,11 @@
+<div class="loading-image__container" ng-hide="loaded">
+  <img src="assets/img/loader-large.gif" />
+</div>
 <div class="container" scroll>
-  <div class="loading-image__container" ng-hide="loaded">
-    <img src="assets/img/loader-large.gif" />
-  </div>
-
   <div
     ng-click="scrollToTheTop()"
     ng-hide="!scrollToTop"
-   style="position: fixed; z-index: 1001; right: 20px; bottom: 20px; opacity: 0.8; width: 40px; height: 40px; background: white; color: black; border: 2px solid black; line-height: 40px; text-align: center;"
+    class="scroll-to-top"
    >
     <i class="glyphicon glyphicon-arrow-up"></i>
   </div>
