@@ -2,10 +2,43 @@
   <img src="assets/img/loader-large.gif" />
 </div>
 
-<a class="btn btn-block" addClass="active" href="/">Back</a>
-{{showId}}
-<div ng-if="showId">
-    <div ng-repeat="show in data | filter: {seriesid: showId}">
-        {{show.seriesname}}
+<a class="btn btn-block" addClass="active" href="/">
+    <i class="{{icon('arrow-left')}}"></i>
+    Back
+</a>
+<div class="container series__item">
+    <div class="series__holder">
+      <div class="series__title">
+        {{detail.seriesname}}
+      </div>
+
+      <div
+        class="series__background"
+        style="background-image: url('{{detail.poster | imageThumb}}')"
+      >
+        <img
+          src="https://tvtracker.co.za/assets/img/overlay.png"
+          alt="{{detail.seriesname}}"
+        />
+      </div>
+
+      <div
+        title={{detail.status}}
+        class="series__status"
+        ng-class="{'series__status--off':detail.status=='Ended','series__status--on':detail.status=='Continuing'}"
+      ></div>
+    </div>
+    </div>
+
+    <div class="container">
+        <h3>Overview</h3>
+        <p ng-if="detail.overview.length < charLimit">
+            {{detail.overview}}
+        </p>
+        <p ng-if="detail.overview.length > charLimit">
+            {{detail.overview | limitTo: charLimit}}
+            ...
+            <span class="btn btn-sm" ng-click="showMore()">MORE</span>
+        </p>
     </div>
 </div>

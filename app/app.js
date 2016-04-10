@@ -7,9 +7,9 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
     });
 
     // Index Controller
-    app.controller("indexCtrl",
-      ["$scope", "$route", "shows", "$location",
-      function($scope, $route, shows, $location) {
+    app.controller("indexCtrl", [
+        "$scope", "$route", "shows", "serviceStorage", "$location",
+        function($scope, $route, shows, serviceStorage, $location) {
 
         $scope.search = "";
         $scope.data = {};
@@ -34,8 +34,16 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
             $scope.paging = $scope.perpage * $scope.page;
         };
 
+        // Detail specific context
+        $scope.setDetail = function(data) {
+            serviceStorage.set('series', data);
+        };
+
+        $scope.icon = function(icon) {
+            return 'glyphicon glyphicon-' + icon;
+        }
+
         $scope.location = $route.current;
-        $scope.showId = $route.current.params.showId || false;
 
         // Load the content from the API
         shows.get({}, function(series){
@@ -48,6 +56,7 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
 
             $scope.loaded = true;
             localStorage.setItem('series', JSON.stringify(series));
+
         // Failure
         }, function(response){
             switch (response.status) {

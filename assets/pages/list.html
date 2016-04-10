@@ -23,8 +23,9 @@
     <div
       class="series__item"
       ng-repeat="series in filteredSeries = (data.series|seriesFilterByPropertyAndTerm:'seriesname':search|limitTo:paging)"
+      ng-hide="series.status=='Ended'"
     >
-      <a href="/detail/{{series.seriesname|slugify}}/{{series.seriesid}}">
+      <a href="/detail/{{series.seriesname|slugify}}/{{series.seriesid}}" ng-click="setDetail(series)">
         <div class="series__holder">
           <div class="series__title">
             {{series.seriesname}}

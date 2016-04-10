@@ -15,7 +15,7 @@ angular.module('routing', ['ngRoute'])
       })
       .when('/detail/:showName/:showId', {
         templateUrl: 'assets/pages/detail.html',
-        controller: 'indexCtrl'
+        controller: 'detailCtrl'
       })
       .otherwise({
         redirectTo: '/'

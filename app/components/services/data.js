@@ -1,7 +1,7 @@
 angular.module('api', ['ngResource'])
 .factory('shows', ["$resource", function($resource) {
 
-  var cacheTime = 300;
+  var cacheTime = 3600;
   var seriesData = JSON.parse(localStorage.getItem('series')) || false;
   var now = Math.round(new Date() / 1000);
 
