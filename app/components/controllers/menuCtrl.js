@@ -7,17 +7,11 @@ app.controller("menuCtrl", [
             $scope.menuOpen = ($scope.menuOpen == false ? true: false);
         };
 
+        // Show the back button when non-root
         $scope.showBackBtn = $location.path() !== '/';
-
         $rootScope.$on( "$routeChangeStart", function(event, next, current) {
             $scope.showBackBtn = next.$$route.originalPath !== '/';
         });
-
-        $scope.$on("navEvent", function(evt,args){
-          $scope.showNav = SystemService.showNav;
-          // also some logic to set the active nav item based on location
-        });
-
 
         // Used to dismiss all interactions
         $scope.dismissAll = function($event) {
