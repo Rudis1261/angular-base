@@ -25,7 +25,7 @@
       ng-repeat="series in filteredSeries = (data.series|seriesFilterByPropertyAndTerm:'seriesname':search|limitTo:paging)"
       ng-hide="series.status=='Ended'"
     >
-      <a href="/detail/{{series.seriesname|slugify}}/{{series.seriesid}}" ng-click="setDetail(series)">
+      <a href="#/detail/{{series.seriesname|slugify}}/{{series.seriesid}}" ng-click="setDetail(series)">
         <div class="series__holder">
           <div class="series__title">
             {{series.seriesname}}
@@ -36,7 +36,7 @@
             style="background-image: url('{{series.poster | imageThumb}}')"
           >
             <img
-              src="https://tvtracker.co.za/assets/img/overlay.png"
+              ng-src="https://tvtracker.co.za/assets/img/overlay.png"
               alt="{{series.seriesname}}"
             />
           </div>

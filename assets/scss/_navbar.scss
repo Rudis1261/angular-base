@@ -56,6 +56,33 @@ header {
         padding-left: 0;
       }
 
+      .navbar-mobile-container {
+        position: fixed;
+        height: $navbar-height;
+        left: 50px;
+        color: white;
+        font-size: 19px;
+        overflow: hidden;
+
+        .logo {
+          padding-left: 6px;
+        }
+
+        i.glyphicon {
+          display: inline-block;
+          width: $navbar-height;
+          @extend .text-center;
+          height: ($navbar-height - 2px);
+          line-height: ($navbar-height - 7px);
+          border-right: 1px solid $black;
+          padding-left: 5px;
+        }
+
+        a:active {
+          background: $grey-dark;
+        }
+      }
+
       .burger-menu {
         $padding: 14px;
         cursor: pointer;
@@ -105,7 +132,7 @@ header {
           border-right: 1px solid $grey;
           border-bottom: 1px solid $grey;
           overflow: none;
-          @include transition(left 0.3s ease);
+          @include transition(left 0.3s ease-in-out);
 
           &.closed {
             left: -90%;

@@ -39,10 +39,6 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
             serviceStorage.set('series', data);
         };
 
-        $scope.icon = function(icon) {
-            return 'glyphicon glyphicon-' + icon;
-        }
-
         $scope.location = $route.current;
 
         // Load the content from the API

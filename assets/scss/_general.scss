@@ -33,6 +33,12 @@
 .pull-left { float: left; }
 .pull-right { float: right; }
 
+.img {
+  &-responsive {
+    width: 100%;
+  }
+}
+
 // Hidden SM
 @include respond-to('sm') {
   .hidden-sm {

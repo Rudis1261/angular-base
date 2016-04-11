@@ -42,3 +42,13 @@ app.directive('addClass', function() {
         }
     };
 });
+
+// Icon-directive
+app.directive('icon', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.addClass('glyphicon glyphicon-'+attrs.icon);
+        }
+    };
+});

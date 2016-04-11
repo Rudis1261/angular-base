@@ -16,7 +16,7 @@
     <!-- Mobile Tab Colors -->
 
     <!-- Set that base -->
-    <base href="/">
+    <base href="/#/">
   </head>
   <body ng-controller="menuCtrl" ng-click="dismissAll($event)">
 
@@ -29,15 +29,18 @@
           <ul class="hidden-sm" ng-repeat="menu in menus">
             <li title="{{menu.title}}">
               <a href="{{menu.href}}">
-                <i class="glyphicon glyphicon-{{menu.icon}}"></i>
+                <i icon="{{menu.icon}}"></i>
                 <span ng-bind="menu.html">Loading</span>
               </a>
             </li>
           </ul>
 
           <!-- Mobile -->
-          <div class="visible-sm" style="position: fixed; height: 50px; left: 60px; color: white; font-size: 19px;">
-            <a href="/">
+          <div class="visible-sm navbar-mobile-container">
+            <a ng-if="showBackBtn" href="/#/">
+              <i icon="arrow-left"></i>
+            </a>
+            <a class="logo" href="/#/">
               <span class="icon-desktop"></span>
               <span>TV Tracker</span>
             </a>
