@@ -54,8 +54,8 @@
       <strong>No shows found</strong>
     </div>
 
-    <div ng-click="pageUp()" class="text-center">
-      <h1>Load more</h1>
+    <div ng-hide="filteredSeries.length" ng-click="pageUp()" class="text-center">
+      <span class="btn btn-block">Load more</span>
     </div>
   </div>
 </div>
