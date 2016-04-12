@@ -1,20 +1,27 @@
 #!/bin/sh
 alias sassc="docker run -it --rm --name=sassc -v $(pwd):$(pwd) -w $(pwd) xzyfer/docker-libsass:latest"
 
-docker rm -f sassc
+docker rm -f sassc 2>&1 > /dev/null
 
-while inotifywait -r -e modify assets/scss;
-do
+buildSCSS() {
     echo `date`" RUNNING: "
-    # No arguments, just run it as is without compressing it
     if [ $# -eq 0 ]; then
         sassc assets/scss/main.scss assets/css/main.css 2>&1 > /tmp/error
     else
         sassc assets/scss/main.scss -t compressed assets/css/main.css 2>&1 > /tmp/error
-    fi
+    fi;
 
     rc=$?; if [ $rc != 0 ]; then
         notify-send "SASS BUILD FAILED!"
         cat /tmp/error | ccze -A
-    fi
+    fi;
+}
+
+# Initial Build
+buildSCSS
+
+# Listen for changes
+while inotifywait -r -e modify assets/scss;
+do
+    buildSCSS
 done

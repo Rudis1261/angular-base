@@ -11,11 +11,10 @@
   </div>
 
   <div class="ng-hide" ng-show="loaded">
-    <div>
+
     <div class="add-on series__input">
       <input type="text" ng-model="search" ng-bind="searchTerm()" placeholder="Find show..." />
       <i ng-if="search" ng-click="clear('search')" class="glyphicon glyphicon-trash"></i>
-    </div>
     </div>
 
     <p ng-if="search">Searching for <b>{{search}}</b>...</p>
