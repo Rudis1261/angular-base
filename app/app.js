@@ -12,6 +12,7 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
         function($scope, $route, shows, serviceStorage, $location) {
 
         $scope.search = "";
+        $scope.state = "Continuing";
         $scope.data = {};
         $scope.loaded = false;
         $scope.titleLength = 13;
@@ -32,6 +33,21 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
         $scope.pageUp = function() {
             $scope.page++;
             $scope.paging = $scope.perpage * $scope.page;
+        };
+
+        $scope.listContext = function(state) {
+            switch(state) {
+                case 'ended':
+                    $scope.state = 'Ended';
+                    break;
+                case 'all':
+                    $scope.state = false;
+                    break;
+                case 'continuing':
+                default:
+                    $scope.state = 'Continuing';
+                    break;        
+            }
         };
 
         // Detail specific context

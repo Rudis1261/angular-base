@@ -1,6 +1,7 @@
 <div class="loading-image__container" ng-hide="loaded">
   <img src="assets/img/loader-large.gif" />
 </div>
+
 <div class="container" scroll>
   <div
     ng-click="scrollToTheTop()"
@@ -10,8 +11,10 @@
     <i class="glyphicon glyphicon-arrow-up"></i>
   </div>
 
+  <!-- Main listing section -->
   <div class="ng-hide" ng-show="loaded">
 
+    <!-- Search functionality --> 
     <div class="add-on series__input">
       <input type="text" ng-model="search" ng-bind="searchTerm()" placeholder="Find show..." />
       <i ng-if="search" ng-click="clear('search')" class="glyphicon glyphicon-trash"></i>
@@ -19,10 +22,31 @@
 
     <p ng-if="search">Searching for <b>{{search}}</b>...</p>
 
+    <!-- Show the various states -->
+    <div class="text-center">
+      <div class="btn-group">
+        <span 
+          class="btn btn-sm" 
+          ng-class="{'active':state=='Continuing'}" 
+          ng-click="listContext('continuing')"
+        >Continuing</span>
+        <span 
+          class="btn btn-sm" 
+          ng-class="{'active':state=='Ended'}" 
+          ng-click="listContext('ended')"
+        >Ended</span>
+        <span 
+          class="btn btn-sm" 
+          ng-class="{'active':!state}" 
+          ng-click="listContext('all')"
+        >All</span>
+      </div>
+    </div>
+
     <div
       class="series__item"
       ng-repeat="series in filteredSeries = (data.series|seriesFilterByPropertyAndTerm:'seriesname':search|limitTo:paging)"
-      ng-hide="series.status=='Ended'"
+      ng-if="!state || series.status==state"
     >
       <a href="#/detail/{{series.seriesname|slugify}}/{{series.seriesid}}" ng-click="setDetail(series)">
         <div class="series__holder">
