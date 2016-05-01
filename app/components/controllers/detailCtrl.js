@@ -10,10 +10,14 @@ app.controller("detailCtrl", [
             $scope.loaded = true;
         }
 
+        // Get the page from the route
+        $scope.page = $routeParams.page || false;
+        console.log($scope.page);
+
         // Otherwise we will need to find the single show to display
         if (!$scope.detail) {
             shows.get({}, function(res){
-                var showDetail = _.where(res.data.series, {seriesid: $routeParams.showId});
+                var showDetail = _.where(res.data.series, { seriesid: $routeParams.showId });
                 if (_.isEmpty(showDetail)) {
                     $location.path("/failure");
                 }

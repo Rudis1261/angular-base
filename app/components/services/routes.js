@@ -13,7 +13,7 @@ angular.module('routing', ['ngRoute'])
         templateUrl: 'assets/pages/failure.html',
         controller: 'indexCtrl'
       })
-      .when('/detail/:showName/:showId', {
+      .when('/detail/:showName/:showId/:page?', {
         templateUrl: 'assets/pages/detail.html',
         controller: 'detailCtrl'
       })

@@ -44,6 +44,27 @@
         <div>{{detail.network}}</div>
     </div>
 
+    <!-- Show the amount of seasons availble for the show -->
+    <div class="container">
+        <h3>Seasons</h3>
+        <ul class="pagination pagination__detail">
+            <!-- {'series__status--off':series.status=='Ended' -->
+            <li ng-repeat="season in detail.seasons | pagination:page" ng-class="{'active':season==page}">
+                <!-- Normal numbered pages -->
+                <a 
+                    ng-show="season!=='.' && season!=='..'" 
+                    href="#/detail/{{detail.seriesname|slugify}}/{{detail.seriesid}}/{{season}}"
+                >{{season}}</a>
+
+                <!-- Ingore Current pages -->
+                <a 
+                    ng-show="season=='.' || season=='..'" 
+                    href="#/detail/{{detail.seriesname|slugify}}/{{detail.seriesid}}/{{page}}"
+                >{{season}}</a>
+            </li>
+        </ul>
+    </div>
+
     <div class="container">
         <h3>Overview</h3>
         <p ng-if="detail.overview.length < charLimit">
