@@ -12,7 +12,7 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
         function($scope, $route, shows, serviceStorage, $location) {
 
         $scope.search = "";
-        $scope.state = "Continuing";
+        $scope.state = false;
         $scope.data = {};
         $scope.loaded = false;
         $scope.titleLength = 13;
@@ -46,7 +46,7 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
                 case 'continuing':
                 default:
                     $scope.state = 'Continuing';
-                    break;        
+                    break;
             }
         };
 
