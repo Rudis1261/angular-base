@@ -2,7 +2,7 @@
   <img src="assets/img/loader-large.gif" />
 </div>
 
-<div class="container">
+<div class="container" ng-if="loaded">
     <div class="series__item">
         <div class="series__holder">
           <div class="series__title">&nbsp;</div>
@@ -44,27 +44,6 @@
         <div>{{detail.network}}</div>
     </div>
 
-    <!-- Show the amount of seasons availble for the show -->
-    <div class="container">
-        <h3>Seasons</h3>
-        <ul class="pagination pagination__detail">
-            <!-- {'series__status--off':series.status=='Ended' -->
-            <li ng-repeat="season in detail.seasons | pagination:page" ng-class="{'active':season==page}">
-                <!-- Normal numbered pages -->
-                <a 
-                    ng-show="season!=='.' && season!=='..'" 
-                    href="#/detail/{{detail.seriesname|slugify}}/{{detail.seriesid}}/{{season}}"
-                >{{season}}</a>
-
-                <!-- Ingore Current pages -->
-                <a 
-                    ng-show="season=='.' || season=='..'" 
-                    href="#/detail/{{detail.seriesname|slugify}}/{{detail.seriesid}}/{{page}}"
-                >{{season}}</a>
-            </li>
-        </ul>
-    </div>
-
     <div class="container">
         <h3>Overview</h3>
         <p ng-if="detail.overview.length < charLimit">
@@ -76,5 +55,22 @@
             ...
             <span class="btn btn-sm" ng-click="showMore()">MORE</span>
         </p>
+    </div>
+
+    <!-- Show the amount of seasons available for the show -->
+    <div class="container" name="seasons" id="seasons">
+        <h3>Seasons</h3>
+        <ul class="pagination pagination__detail">
+            <!-- {'series__status--off':series.status=='Ended' -->
+            <li ng-repeat="season in detail.seasons | pagination:page" ng-class="{'active':season==page}">
+                <span
+                    ng-show="season!=='.' && season!=='..'"
+                    ng-click="setPage(season)"
+                >{{season}}</span>
+            </li>
+        </ul>
+        <ul>
+            <li ng-repeat="episodes in episodeList" ng-if="episodes.s==page">{{episodes.name}}</li>
+        </ul>
     </div>
 </div>

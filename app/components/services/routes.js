@@ -24,3 +24,20 @@ angular.module('routing', ['ngRoute'])
     // use the HTML5 History API
     //$locationProvider.html5Mode(true);
   });
+
+angular.module('reload-service', [])
+  .factory('reloadService', function($route, $timeout, $location) {
+    return {
+       preventReload: function($scope, navigateCallback) {
+          var lastRoute = $route.current;
+
+          $scope.$on('$locationChangeSuccess', function() {
+             if (lastRoute.$$route.templateUrl === $route.current.$$route.templateUrl) {
+                var routeParams = angular.copy($route.current.params);
+                $route.current = lastRoute;
+                navigateCallback(routeParams);
+             }
+          });
+       }
+    };
+  });

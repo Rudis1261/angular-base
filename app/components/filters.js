@@ -62,6 +62,19 @@ app.filter('seriesById', function() {
   };
 });
 
+// Filter out season
+app.filter('bySeason', function() {
+  return function(items, id) {
+    angular.forEach(items, function(item) {
+      console.log("season: ", item.s, "page: ", (Number(item.s) == Number(id)));
+      if (Number(item.s) == Number(id)) {
+        console.log("filtered: ", item);
+        return item;
+      }
+    });
+  };
+});
+
 
 // Create a pagination filter
 app.filter('pagination', function() {
@@ -80,19 +93,19 @@ app.filter('pagination', function() {
         for(var i = 1; i <= pages; i++) {
             pagination.push(i);
         }
-        return pagination;   
+        return pagination;
     }
 
     // Larger page results
-    if (!current || current <= 1) { 
-        current = 2; 
+    if (!current || current <= 1) {
+        current = 2;
     }
 
     pagination.push(1);
 
     // Padding between pagination
     padding = 2;
-    offset = current + padding; 
+    offset = current + padding;
 
     if (offset > pages) {
       current = (pages - padding);
@@ -103,14 +116,14 @@ app.filter('pagination', function() {
 
     if (current > 3) {
       pagination.push('.');
-    } 
+    }
 
     if (current > 2) {
       current--;
       offset--;
-    } 
+    }
 
-    // The body of the pager 
+    // The body of the pager
     for(var i = current; i <= offset; i++) {
         if (i > pages) {
             break;
@@ -122,9 +135,9 @@ app.filter('pagination', function() {
     if ((current + padding) < pages - 1) {
         pagination.push('..');
     }
-    pagination.push(Number(pages)); 
+    pagination.push(Number(pages));
     //console.log(pagination, current, offset);
 
-    return pagination;   
+    return pagination;
   };
 });

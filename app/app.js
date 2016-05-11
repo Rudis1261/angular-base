@@ -1,5 +1,23 @@
 var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
 
+    app.run(function ($anchorScroll) {
+        $anchorScroll.yOffset = 60;
+    });
+
+    app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+        var original = $location.path;
+        $location.path = function (path, reload) {
+            if (reload === false) {
+                var lastRoute = $route.current;
+                var un = $rootScope.$on('$locationChangeSuccess', function () {
+                    $route.current = lastRoute;
+                    un();
+                });
+            }
+            return original.apply($location, [path]);
+        };
+    }]);
+
     app.config(function ($httpProvider) {
       $httpProvider.defaults.headers.post = {};
       $httpProvider.defaults.headers.get = {};
@@ -52,13 +70,13 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
 
         // Detail specific context
         $scope.setDetail = function(data) {
-            serviceStorage.set('series', data);
+            serviceStorage.set('show', data);
         };
 
         $scope.location = $route.current;
 
         // Load the content from the API
-        shows.get({}, function(series){
+        shows.get({'action': 'shows'}, function(series){
             $scope.data = series.data;
             console.log($scope.data);
 
@@ -67,7 +85,7 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
             }
 
             $scope.loaded = true;
-            localStorage.setItem('series', JSON.stringify(series));
+            localStorage.setItem('shows', JSON.stringify(series));
 
         // Failure
         }, function(response){
