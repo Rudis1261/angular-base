@@ -75,7 +75,6 @@ app.filter('bySeason', function() {
   };
 });
 
-
 // Create a pagination filter
 app.filter('pagination', function() {
   return function(pages, current) {
@@ -139,5 +138,16 @@ app.filter('pagination', function() {
     //console.log(pagination, current, offset);
 
     return pagination;
+  };
+});
+
+angular.module('filters', []).filter('zpad', function() {
+  return function(input, n) {
+    if(input === undefined)
+      input = ""
+    if(input.length >= n)
+      return input
+    var zeros = "0".repeat(n);
+    return (zeros + input).slice(-1 * n)
   };
 });

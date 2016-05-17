@@ -51,6 +51,10 @@ app.controller("detailCtrl", [
             });
         }
 
+        $scope.episodeTitle = function(episode) {
+            return "S" + ("00"+episode.s).slice(-2) + "E" + ("00"+episode.e).slice(-2);
+        };
+
         $scope.scrollToSeasons = function(){
             $anchorScroll('seasons');
         };

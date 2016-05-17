@@ -69,8 +69,11 @@
                 >{{season}}</span>
             </li>
         </ul>
-        <ul>
-            <li ng-repeat="episodes in episodeList" ng-if="episodes.s==page">{{episodes.name}}</li>
+        <ul class="pagination__list">
+            <li ng-repeat="episode in episodeList" ng-if="episode.s==page">
+                <span class="episode" ng-bind="episodeTitle(episode)"></span>&nbsp;
+                <span>{{episode.name}}</span>
+            </li>
         </ul>
     </div>
 </div>

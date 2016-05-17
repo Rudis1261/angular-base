@@ -16,7 +16,7 @@ angular.module('api', ['ngResource'])
 
   // Baring a cached version, return the AJAX Response
   var apiEndpoint = "https://tvtracker.co.za/api/0.1/:action/:id";
-  //var apiEndpoint = "http://dev.tvtracker.co.za/api/0.1";
+  //var apiEndpoint = "http://dev.tvtracker.co.za/api/0.1/:action/:id";
   var api = $resource(apiEndpoint);
   return {
     get: api.get,

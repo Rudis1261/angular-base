@@ -121,28 +121,6 @@
         border-color: transparent transparent $red transparent;
       }
     }
-
-    // &:before {
-    //   font-weight: bold;
-    //   @extend .glyphicon;
-    //   @extend .glyphicon-ok;
-    //   width: $triangle-size;
-    //   text-align: center;
-    //   float: right;
-    //   color: $white;
-    //   margin-left: -($triangle-size - 3px);
-    //   margin-right: -3px;
-    //   line-height: ($triangle-size + 6px);
-    //   font-size: ($triangle-size / 2);
-    // }
-    // &--off {
-    //   &:before {
-    //     margin-left: -($triangle-size - 4px);
-    //     margin-right: -4px;
-    //     line-height: ($triangle-size + 8px);
-    //     @extend .glyphicon-remove;
-    //   }
-    // }
   }
 
   &__title {
