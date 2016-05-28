@@ -22,6 +22,8 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
       $httpProvider.defaults.headers.post = {};
       $httpProvider.defaults.headers.get = {};
       $httpProvider.defaults.withCredentials = true;
+
+      $httpProvider.defaults.cache = true;
     });
 
     // Index Controller
@@ -76,27 +78,11 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
         $scope.location = $route.current;
 
         // Load the content from the API
-        shows.get({'action': 'shows'}, function(series){
-            $scope.data = series.data;
-            console.log($scope.data);
-
+        shows.get({'action': 'shows'}, function(responseData){
+            $scope.data = responseData;
             if ($scope.showId) {
-                $scope.data = $scope.data.series;
+                $scope.data = $scope.responseData;
             }
-
             $scope.loaded = true;
-            localStorage.setItem('shows', JSON.stringify(series));
-
-        // Failure
-        }, function(response){
-            switch (response.status) {
-                case 400:
-                case 401:
-                    $location.path("/login");
-                    break;
-                default:
-                    $location.path("/failure");
-                    break;
-            }
         });
     }]);
