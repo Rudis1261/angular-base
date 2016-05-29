@@ -20,6 +20,9 @@ app.controller("detailCtrl", [
         };
 
         $scope.setPage = function(page){
+            if (page == "  " || page == " ") {
+                return false;
+            }
             if (!$scope.page) {
                 $scope.loadEpisodes();
             }

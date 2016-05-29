@@ -114,7 +114,7 @@ app.filter('pagination', function() {
     //console.log((offset > pages), offset, current);
 
     if (current > 3) {
-      pagination.push('.');
+      pagination.push('prev');
     }
 
     if (current > 2) {
@@ -132,7 +132,7 @@ app.filter('pagination', function() {
 
     //Should we add the last page? If it's out of bounds?
     if ((current + padding) < pages - 1) {
-        pagination.push('..');
+        pagination.push('next');
     }
     pagination.push(Number(pages));
     //console.log(pagination, current, offset);

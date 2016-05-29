@@ -27,6 +27,7 @@
 		display: inline-block;
 		width: $pagination-size;
 		border-right: 1px solid $grey-light;
+		float:left;
 		@extend .text-center;
 
 		&.active {
@@ -46,6 +47,12 @@
 		}
 		&:first-of-type {
 			border-left: none;
+		}
+
+		&.separator {
+			width: 8px;
+			background: $grey-dark;
+			height: $pagination-size;
 		}
 	}
 

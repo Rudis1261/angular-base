@@ -31,6 +31,7 @@
     "ng-fastclick": "^1.0.2",
     "angular-route": "^1.5.3",
     "underscore": "^1.8.3",
-    "angular-jwt": "^0.0.9"
+    "angular-jwt": "^0.0.9",
+    "angular-localstorage": "^1.0.0"
   }
 }

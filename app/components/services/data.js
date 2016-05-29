@@ -1,4 +1,4 @@
-angular.module('api', ['ngResource'])
+angular.module('api', [])
 .factory('shows', ["$http", "$cacheFactory", "$location", function($http, $cacheFactory, $location) {
 
   // Baring a cached version, return the AJAX Response

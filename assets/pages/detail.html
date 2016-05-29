@@ -62,11 +62,8 @@
         <h3>Seasons</h3>
         <ul class="pagination pagination__detail" ng-if="detail.seasons">
             <!-- {'series__status--off':series.status=='Ended' -->
-            <li ng-repeat="season in detail.seasons | pagination:page" ng-class="{'active':season==page}">
-                <span
-                    ng-show="season!=='.' && season!=='..'"
-                    ng-click="setPage(season)"
-                >{{season}}</span>
+            <li ng-repeat="season in detail.seasons | pagination:page" ng-class="{'active':season==page, 'separator': (season=='next' || season=='prev')}">
+                <span ng-click="setPage(season)" ng-if="!(season=='next' || season=='prev')">{{season}}</span>
             </li>
         </ul>
         <ul class="pagination__list" ng-if="episodeList">

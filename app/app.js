@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
+var app = angular.module("app", ['ngRoute','ngLocalStorage', 'api', 'routing', 'ng-fastclick']);
 
     app.run(function ($anchorScroll) {
         $anchorScroll.yOffset = 60;
@@ -28,61 +28,67 @@ var app = angular.module("app", ['ngRoute', 'api', 'routing', 'ng-fastclick']);
 
     // Index Controller
     app.controller("indexCtrl", [
-        "$scope", "$route", "shows", "serviceStorage", "$location",
-        function($scope, $route, shows, serviceStorage, $location) {
+        "$scope", "$localStorage", "$route", "shows", "serviceStorage", "$location",
+        function($scope, $localStorage, $route, shows, serviceStorage, $location) {
 
-        $scope.search = "";
-        $scope.state = false;
-        $scope.data = {};
-        $scope.loaded = false;
-        $scope.titleLength = 13;
-        $scope.perpage = 60;
-        $scope.page = 1;
-        $scope.paging = $scope.perpage * $scope.page;
-        $scope.scrollToTop = false;
-
-        // Clear an input
-        $scope.clear = function(input) {
-            $scope[input] = "";
-        };
-
-        $scope.scrollToTheTop = function() {
-            window.scrollTo(0, 0);
-        };
-
-        $scope.pageUp = function() {
-            $scope.page++;
+            $scope.search = "";
+            $scope.state = $localStorage.get('stateSwitcher');
+            if (!$scope.state || $scope.state == 'all') {
+                $scope.state = false;
+            }
+            $scope.data = {};
+            $scope.loaded = false;
+            $scope.titleLength = 13;
+            $scope.perpage = 60;
+            $scope.page = 1;
             $scope.paging = $scope.perpage * $scope.page;
-        };
+            $scope.scrollToTop = false;
 
-        $scope.listContext = function(state) {
-            switch(state) {
-                case 'ended':
-                    $scope.state = 'Ended';
-                    break;
-                case 'all':
-                    $scope.state = false;
-                    break;
-                case 'continuing':
-                default:
-                    $scope.state = 'Continuing';
-                    break;
-            }
-        };
+            // Clear an input
+            $scope.clear = function(input) {
+                $scope[input] = "";
+            };
 
-        // Detail specific context
-        $scope.setDetail = function(data) {
-            serviceStorage.set('show', data);
-        };
+            $scope.scrollToTheTop = function() {
+                window.scrollTo(0, 0);
+            };
 
-        $scope.location = $route.current;
+            $scope.pageUp = function() {
+                $scope.page++;
+                $scope.paging = $scope.perpage * $scope.page;
+            };
 
-        // Load the content from the API
-        shows.get({'action': 'shows'}, function(responseData){
-            $scope.data = responseData;
-            if ($scope.showId) {
-                $scope.data = $scope.responseData;
-            }
-            $scope.loaded = true;
-        });
-    }]);
+            $scope.listContext = function(state) {
+                switch(state) {
+                    case 'ended':
+                        $localStorage.put('stateSwitcher', 'Ended');
+                        $scope.state = 'Ended';
+                        break;
+                    case 'all':
+                        $localStorage.put('stateSwitcher', 'all');
+                        $scope.state = false;
+                        break;
+                    case 'continuing':
+                    default:
+                        $localStorage.put('stateSwitcher', 'Continuing');
+                        $scope.state = 'Continuing';
+                        break;
+                }
+            };
+
+            // Detail specific context
+            $scope.setDetail = function(data) {
+                serviceStorage.set('show', data);
+            };
+
+            $scope.location = $route.current;
+
+            // Load the content from the API
+            shows.get({'action': 'shows'}, function(responseData){
+                $scope.data = responseData;
+                if ($scope.showId) {
+                    $scope.data = $scope.responseData;
+                }
+                $scope.loaded = true;
+            });
+        }]);

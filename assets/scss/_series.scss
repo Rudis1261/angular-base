@@ -32,7 +32,12 @@
 
   &__rating {
     font-size: 14px;
-    color: $blue;
+    .glyphicon-star {
+      color: gold;
+    }
+    .glyphicon-star-empty {
+      color: lighten(gold, 10%);
+    }
   }
 
   &__item {
