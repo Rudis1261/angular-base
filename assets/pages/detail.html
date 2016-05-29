@@ -60,7 +60,7 @@
     <!-- Show the amount of seasons available for the show -->
     <div class="container" name="seasons" id="seasons">
         <h3>Seasons</h3>
-        <ul class="pagination pagination__detail">
+        <ul class="pagination pagination__detail" ng-if="detail.seasons">
             <!-- {'series__status--off':series.status=='Ended' -->
             <li ng-repeat="season in detail.seasons | pagination:page" ng-class="{'active':season==page}">
                 <span
@@ -69,10 +69,20 @@
                 >{{season}}</span>
             </li>
         </ul>
-        <ul class="pagination__list">
-            <li ng-repeat="episode in episodeList" ng-if="episode.s==page">
+        <ul class="pagination__list" ng-if="episodeList">
+            <li ng-repeat="episode in episodeList" ng-if="episode.s==page" toggle-class="open">
+                <span episode-highlight></span>
                 <span class="episode" ng-bind="episodeTitle(episode)"></span>&nbsp;
                 <span>{{episode.name}}</span>
+                <div class="clearfix"></div>
+                <div class="details">
+                    <span ng-if="episode.date" class="air-date">
+                        {{episode.date * 1000|date:"dd MMM yyyy"}}
+                    </span>
+                    <p>
+                        {{episode.overview}}
+                    </p>
+                </div>
             </li>
         </ul>
     </div>

@@ -15,6 +15,19 @@ app.directive('hires', function() {
   };
 });
 
+app.directive('toggleClass', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', function() {
+                //var all = (document.querySelector('[toggle-class]'));
+                //console.log(all);
+                element.toggleClass(attrs.toggleClass);
+            });
+        }
+    };
+});
+
 // Bind scrolltop functionality
 app.directive("scroll", function ($window) {
     return function(scope, element, attrs) {
@@ -49,6 +62,38 @@ app.directive('icon', function() {
         restrict: 'A',
         link: function(scope, element, attrs) {
             element.addClass('glyphicon glyphicon-'+attrs.icon);
+        }
+    };
+});
+
+// Icon-directive
+app.directive('episodeHighlight', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            if (!scope.episode.date) {
+                return false;
+            }
+
+            var now = new Date();
+            now = now.setDate(now.getDate());
+
+            var recent = new Date();
+            recent = recent.setDate(recent.getDate() - 14);
+
+            var comingSoon = new Date();
+            comingSoon = comingSoon.setDate(comingSoon.getDate() + 14);
+
+            var check = new Date(scope.episode.date * 1000);
+            check = check.setDate(check.getDate());
+
+            if (check > now && check < comingSoon) {
+                return element.addClass('coming-soon');
+            }
+
+            if (check < now && check > recent) {
+                return element.addClass('recent');
+            }
         }
     };
 });

@@ -12,6 +12,7 @@ app.controller("detailCtrl", [
 
         $scope.loadEpisodes = function() {
             shows.get({ 'action': 'episodes', 'id': $scope.detail.seriesid }, function(respondData){
+                console.log(respondData);
                 $scope.episodeList = respondData.episodes;
                 $timeout($scope.scrollToSeasons, 300);
                 $scope.loaded = true;
