@@ -14,7 +14,7 @@
   <!-- Main listing section -->
   <div class="ng-hide" ng-show="loaded">
 
-    <!-- Search functionality --> 
+    <!-- Search functionality -->
     <div class="add-on series__input">
       <input type="text" ng-model="search" ng-bind="searchTerm()" placeholder="Find show..." />
       <i ng-if="search" ng-click="clear('search')" class="glyphicon glyphicon-trash"></i>
@@ -25,19 +25,19 @@
     <!-- Show the various states -->
     <div class="text-center">
       <div class="btn-group">
-        <span 
-          class="btn btn-sm" 
-          ng-class="{'active':state=='Continuing'}" 
+        <span
+          class="btn btn-sm"
+          ng-class="{'active':state=='Continuing'}"
           ng-click="listContext('continuing')"
         >Continuing</span>
-        <span 
-          class="btn btn-sm" 
-          ng-class="{'active':state=='Ended'}" 
+        <span
+          class="btn btn-sm"
+          ng-class="{'active':state=='Ended'}"
           ng-click="listContext('ended')"
         >Ended</span>
-        <span 
-          class="btn btn-sm" 
-          ng-class="{'active':!state}" 
+        <span
+          class="btn btn-sm"
+          ng-class="{'active':!state}"
           ng-click="listContext('all')"
         >All</span>
       </div>

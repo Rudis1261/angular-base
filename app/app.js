@@ -4,18 +4,34 @@ var app = angular.module("app", ['ngRoute','ngLocalStorage', 'api', 'routing', '
         $anchorScroll.yOffset = 60;
     });
 
-    app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+    app.run([
+      '$route', '$rootScope', '$location', '$timeout',
+      function ($route, $rootScope, $location, $timeout) {
+
         var original = $location.path;
         $location.path = function (path, reload) {
-            if (reload === false) {
-                var lastRoute = $route.current;
-                var un = $rootScope.$on('$locationChangeSuccess', function () {
-                    $route.current = lastRoute;
-                    un();
-                });
-            }
-            return original.apply($location, [path]);
+          if (reload === false) {
+            var lastRoute = $route.current;
+            var un = $rootScope.$on('$locationChangeSuccess', function () {
+              $route.current = lastRoute;
+              un();
+            });
+          }
+          return original.apply($location, [path]);
         };
+
+        $rootScope.pageLoading = true;
+        $rootScope.$on('$viewContentLoaded', function(){
+          $timeout(function(){
+            $rootScope.pageLoading = false;
+
+            if($rootScope.initialLoad != true) {
+              $timeout(function(){
+                $rootScope.initialLoad = true;
+              }, 500);
+            }
+          }, 1000);
+        });
     }]);
 
     app.config(function ($httpProvider) {
